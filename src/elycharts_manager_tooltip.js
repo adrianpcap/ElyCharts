@@ -73,14 +73,14 @@ $.elycharts.tooltipmanager = {
   },
   
   /**
-   * Ritorna [x, y] oppure [x, y, true] se le coordinate sono relative alla pagina (e non al grafico)
+   * Return to [x, y] or [x, y, true] if the coordinates are relative to the page (and not the graph)
    */
   getXY : function(env, props, mouseAreaData) {
-    // NOTA Posizione mouse: mouseAreaData.event.pageX/pageY
+    // Position the mouse NOTE: mouseAreaData.event.pageX / pageY
     var x = 0, y = 0;
     if (mouseAreaData.path[0][0] == 'RECT') {
-      // L'area e' su un rettangolo (un bar o un indice completo), il tooltip lo faccio subito sopra
-      // Nota: per capire se e' sull'indice completo basta guardare mouseAreaData.piece == null
+      // The area 'in a rectangle (a bar or a full index), the tooltip I do it just above
+      // Note: To understand if and 'just look mouseAreaData.piece comprehensive index == null
       x = common.getX(mouseAreaData.path[0]) - props.offset[1];
       y = common.getY(mouseAreaData.path[0]) - props.height - props.offset[0];
     }
@@ -90,14 +90,14 @@ $.elycharts.tooltipmanager = {
       y = common.getY(mouseAreaData.path[0]) - props.height - props.offset[0];
     }
     else if (mouseAreaData.path[0][0] == 'SLICE') {
-      // L'area è su una fetta di torta (pie)
+      // The area is a slice of pie (pie)
       var path = mouseAreaData.path[0];
       
-      // Genera la posizione del tip considerando che deve stare all'interno di un cerchio che è sempre dalla parte opposta dell'area
-      // e deve essere il piu' vicino possibile all'area
+      // Generates the position of the tip whereas must stay within a circle which is always on the opposite side of the area
+      // and must be as' close as possible to
       var w = props.width && props.width != 'auto' ? props.width : 100;
       var h = props.height && props.height != 'auto' ? props.height : 100;
-      // Raggio del cerchio che contiene il tip
+      // Radius of the circle that contains the tip
       var cr = Math.sqrt(Math.pow(w,2) + Math.pow(h,2)) / 2;
       if (cr > env.opt.r)
               cr = env.opt.r;
@@ -108,7 +108,7 @@ $.elycharts.tooltipmanager = {
       y = path[2] + cr * Math.sin(- tipangle * rad) - h / 2;
     }
     else if (mouseAreaData.piece && mouseAreaData.piece.paths && mouseAreaData.index >= 0 && mouseAreaData.piece.paths[mouseAreaData.index] && mouseAreaData.piece.paths[mouseAreaData.index].rect) {
-      // L'area ha una forma complessa, ma abbiamo il rettangolo di contenimento (funnel)
+      // The area has a complex shape, but we have the bounding box (funnel)
       var rect = mouseAreaData.piece.paths[mouseAreaData.index].rect;
       x = rect[0] - props.offset[1];
       y = rect[1] - props.height - props.offset[0];
@@ -150,7 +150,7 @@ $.elycharts.tooltipmanager = {
     //  return this.onMouseExit(env, serie, index, mouseAreaData);
     //var tip = serie ? env.opt.tooltips[serie][index] : env.opt.tooltips[index];
     
-    // Il dimensionamento del tooltip e la view del frame SVG, lo fa solo se width ed height sono specificati
+    // The sizing of tooltip and frame the view of SVG, it does so only if width and height are specified
     if (props.width && props.width != 'auto' && props.height && props.height != 'auto') {
       var delta = props.frameProps && props.frameProps['stroke-width'] ? props.frameProps['stroke-width'] : 0;
       env.tooltipContainer.width(props.width + delta + 1).height(props.height + delta + 1);
@@ -179,7 +179,7 @@ $.elycharts.tooltipmanager = {
     var tip = serie ? env.opt.tooltips[serie][index] : env.opt.tooltips[index];*/
     
     env.tooltipContainer.clearQueue();
-    // Nota: Non passo da animationStackPush, i tooltip non sono legati a piece
+    // Note: Do not step animationStackPush, tooltips are not tied to piece
     env.tooltipContainer.animate(this._prepareShow(env, props, mouseAreaData, tip), env.opt.features.tooltip.moveDelay, 'linear' /*swing*/);
 
     return true;

@@ -25,8 +25,8 @@ $.elycharts.animationmanager = {
   },
   
   stepAnimation : function(env, pieces) {
-    // env.pieces sono i vecchi pieces, ed e' sempre un array completo di tutte le sezioni
-    // pieces sono i nuovi pezzi da mostrare, e potrebbe essere parziale
+    // Env.pieces are old pieces, and is' always a complete array of all sections
+    // Pieces are the new pieces to show, and may be partial
     //console.warn('from1', common._clone(env.pieces));
     //console.warn('from2', common._clone(pieces));
     pieces = this._stepAnimationInt(env, env.pieces, pieces);
@@ -34,7 +34,7 @@ $.elycharts.animationmanager = {
   },
 
   _stepAnimationInt : function(env, pieces1, pieces2, section, serie, internal) {
-    // Se pieces2 == null deve essere nascosto tutto pieces1
+    // If pieces2 == null must be hidden throughout pieces1
 
     var newpieces = [], newpiece;
     var j = 0;
@@ -45,8 +45,8 @@ $.elycharts.animationmanager = {
       else
         animationProps = env.opt.features.animation.stepAnimation;
 
-      // Se il piece attuale c'e' solo in pieces2 lo riporto nei nuovi, impostando come gia' mostrato
-      // A meno che internal = true (siamo in un multipath, nel caso se una cosa non c'e' va considerata da togliere)
+      // If the current piece there 'only pieces2 him back in the new setting as already' shown
+      // Unless internal = true (we are in a multipath, in case if something is not there 'should be considered to remove)
       if (pieces2 && (j >= pieces2.length || !common.samePiecePath(pieces1[i], pieces2[j]))) {
         if (!internal) {
           pieces1[i].show = false;
@@ -62,19 +62,19 @@ $.elycharts.animationmanager = {
           newpieces.push(newpiece);
         }
       }
-      // Bisogna gestire la transizione dal vecchio piece al nuovo
+      // We must manage the transition from the old to the new piece
       else {
         newpiece = pieces2 ? pieces2[j] : { path : false, attr : false };
         newpiece.show = true;
         if (typeof pieces1[i].paths == 'undefined') {
-          // Piece a singolo path
+          // Piece single path
           newpiece.animation = {
             element : pieces1[i].element ? pieces1[i].element : false,
             speed : animationProps && animationProps.speed ? animationProps.speed : 300,
             easing : animationProps && animationProps.easing ? animationProps.easing : '',
             delay : animationProps && animationProps.delay ? animationProps.delay : 0
           }
-          // Se non c'era elemento precedente deve gestire il fadeIn
+          // If there was no previous element must manage fadeIn
           if (!pieces1[i].element)
             newpiece.animation.startAttr = {opacity : 0};
           
@@ -117,7 +117,7 @@ $.elycharts.animationmanager = {
   },
   
   /**
-   * Inserisce i dati base di animazione del piece e la transizione di attributi
+   * Inserts data based piece of animation and transition attributes
    */
   _animationPiece : function(piece, animationProps, subSection) {
     if (piece.paths) {

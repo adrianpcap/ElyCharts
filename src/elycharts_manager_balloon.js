@@ -57,7 +57,7 @@ $.elycharts.balloonmanager = {
     else 
       $(balloon).css(style).css(conf.style).prependTo(env.container);
     
-    // Disegna la linea
+    // Draw the line
     if (conf.line) {
       var path = [];
       for (var j = 0; j < conf.line.length; j++) {

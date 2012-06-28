@@ -12,18 +12,18 @@ var featuresmanager = $.elycharts.featuresmanager;
 var common = $.elycharts.common;
 
 /***********************************************************************
- * FEATURE: ANCHOR
- * 
- * Permette di collegare i dati del grafico con delle aree esterne, 
- * identificate dal loro selettore CSS, e di interagire con esse.
- **********************************************************************/
+  * FEATURE: ANCHOR
+  *
+  * Connect to data in the chart with the outside areas,
+  * Identified by their CSS selector, and interact with them.
+  **********************************************************************/
 
 $.elycharts.anchormanager = {
   
   afterShow : function(env, pieces) {
-    // Prendo le aree gestite da mouseAreas, e metto i miei listener
-    // Non c'e' bisogno di gestire il clean per una chiamata successiva, lo fa gia' il mouseareamanager
-    // Tranne per i bind degli eventi jquery
+      // I take the areas managed by mouseAreas, and I put my listener
+     // There is no 'need to manage the clean for the next call, he does already' the mouseareamanager
+     // Except for the binding event jquery
 
     if (!env.opt.anchors)
       return;

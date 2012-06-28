@@ -40,12 +40,12 @@ $.elycharts.highlightmanager = {
 
   onMouseOver : function(env, serie, index, mouseAreaData) {
     var path, element;
-    // TODO Se non e' attivo l'overlay (per la serie o per tutto) e' inutile fare il resto
+    // TODO If not 'active overlay (for the series or the whole) and' useless to the rest
 
-    // Cerco i piece da evidenziare (tutti quelli che sono costituiti da path multipli)
+    // Seeking to highlight the piece (those that consist of multiple paths)
     for (var i = 0; i < mouseAreaData.pieces.length; i++)
 
-      // Il loop sotto estrae solo i pieces con array di path (quindi non i line o i fill del linechart ... ma il resto si)
+      // The loop in extracts only the pieces with the array of path (not the line or fill the LineChart ... but the rest)
       if (mouseAreaData.pieces[i].section == 'Series' && mouseAreaData.pieces[i].paths
         && (!serie || mouseAreaData.pieces[i].serie == serie)
         && mouseAreaData.pieces[i].paths[index] && mouseAreaData.pieces[i].paths[index].element) {
@@ -53,7 +53,7 @@ $.elycharts.highlightmanager = {
         element = piece.element;
         path = piece.path;
         var attr = common.getElementOriginalAttrs(element);
-        var newattr = false; // In caso la geometria dell'oggetto è modificata mediante attr (es: per circle) qui memorizza i nuovi attributi
+        var newattr = false; // If the geometry of the object is modified by attr (eg for circle) stores here the new attributes
         var props = serie ? mouseAreaData.props : common.areaProps(env, mouseAreaData.pieces[i].section, mouseAreaData.pieces[i].serie);
         var pelement, ppiece, ppath;
         if (path && props.highlight) {
@@ -74,7 +74,7 @@ $.elycharts.highlightmanager = {
               common.animationStackPush(env, piece, element, newattr, props.highlight.scaleSpeed, props.highlight.scaleEasing);
             }
             else if (path[0][0] == 'SLICE') {
-              // Per lo slice x e' il raggio, y e' l'angolo
+              // To slice and x 'radius, and y' angle
               var d = (path[0][6] - path[0][5]) * (scale[1] - 1) / 2;
               if (d > 90)
                 d = 90;
@@ -85,7 +85,7 @@ $.elycharts.highlightmanager = {
               var dx = (piece.rect[2] - piece.rect[0]) * (scale[0] - 1) / 2;
               var dy = (piece.rect[3] - piece.rect[1]) * (scale[1] - 1) / 2;
 
-              // Specifico di un settore del funnel
+              // Specific to a sector of the funnel
               common.animationStackStart(env);
               path = [ common.movePath(env, [ path[0]], [-dx, -dy])[0],
                 common.movePath(env, [ path[1]], [+dx, -dy])[0],
@@ -94,7 +94,7 @@ $.elycharts.highlightmanager = {
                 path[4] ];
               common.animationStackPush(env, piece, element, common.getSVGProps(common.preparePathShow(env, path)), props.highlight.scaleSpeed, props.highlight.scaleEasing, 0, true);
 
-              // Se c'e' un piece precedente lo usa, altrimenti cerca un topSector per la riduzione
+              // If there is' a piece before using it, otherwise it tries to reduce a topSector
               pelement = false;
               if (index > 0) {
                 ppiece = mouseAreaData.pieces[i].paths[index - 1];
@@ -118,7 +118,7 @@ $.elycharts.highlightmanager = {
                 env.highlighted.push({piece : ppiece, cfg : props.highlight});
               }
 
-              // Se c'e' un piece successivo lo usa, altrimenti cerca un bottomSector per la riduzione
+              // If there is' a piece later uses it, otherwise it tries to reduce a bottomSector
               pelement = false;
               if (index < mouseAreaData.pieces[i].paths.length - 1) {
                 ppiece = mouseAreaData.pieces[i].paths[index + 1];
@@ -144,7 +144,7 @@ $.elycharts.highlightmanager = {
 
               common.animationStackEnd(env);
             }
-            /* Con scale non va bene
+            /* With stairs is not good
             if (!attr.scale)
               attr.scale = [1, 1];
             element.attr({scale : [scale[0], scale[1]]}); */
@@ -165,15 +165,15 @@ $.elycharts.highlightmanager = {
           env.highlighted.push({piece : piece, cfg : props.highlight});
 
           if (props.highlight.overlayProps) {
-            // NOTA: path e' il path modificato dai precedenti (cosi' l'overlay tiene conto della cosa), deve guardare anche a newattr
+            // NOTE: path and 'path changed from the previous ones (like' overlay takes account of the thing), should also look at newattr
             //BIND: mouseAreaData.listenerDisabled = true;
             element = common.showPath(env, path);
             if (newattr)
               element.attr(newattr);
             element.attr(props.highlight.overlayProps);
             //BIND: $(element.node).unbind().mouseover(mouseAreaData.mouseover).mouseout(mouseAreaData.mouseout);
-            // Se metto immediatamente il mouseAreaData.listenerDisabled poi va comunque un mouseout dalla vecchia area e va
-            // in loop. TODO Rivedere e sistemare anche per tooltip
+            // If I then immediately mouseAreaData.listenerDisabled is still a mouseout from the old site, and goes
+            // in loop. TODO Review and fix for tooltips
             //BIND: setTimeout(function() { mouseAreaData.listenerDisabled = false; }, 10);
             attr = false;
             env.highlighted.push({element : element, attr : attr, cfg : props.highlight});

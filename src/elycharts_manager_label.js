@@ -12,17 +12,17 @@
 var common = $.elycharts.common;
 
 /***********************************************************************
- * FEATURE: LABELS
- * 
- * Permette di visualizzare in vari modi le label del grafico.
- * In particolare per pie e funnel permette la visualizzazione all'interno
- * delle fette.
- * Per i line chart le label sono visualizzate già nella gestione assi.
- * 
- * TODO:
- * - Comunque per i line chart si potrebbe gestire la visualizzazione
- *   all'interno delle barre, o sopra i punti.
- **********************************************************************/
+  * FEATURE: LABELS
+  *
+  * Allows you to view in various ways the labels of the graph.
+  * In particular pie and funnel allows viewing within
+  * Slices.
+  * For the line chart labels are displayed already in the management boards.
+  *
+  * TODO:
+  * - However, for the line chart you could manage the display
+  * Within the bars, or over the points.
+  **********************************************************************/
 
 $.elycharts.labelmanager = {
 
@@ -98,7 +98,7 @@ $.elycharts.labelmanager = {
         else
           el = $(label).css(style).prependTo(env.container);
           
-        // Centramento corretto label
+        // Centering the correct label
         if (env.opt.features.debug.active && el.height() == 0)
           alert('DEBUG: Al gestore label e\' stata passata una label ancora senza dimensioni, quindi ancora non disegnata. Per questo motivo il posizionamento potrebbe non essere correto.');
         var posX = center[0];

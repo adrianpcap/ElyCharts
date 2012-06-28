@@ -36,7 +36,7 @@ $.elycharts.line = {
     var labels = env.opt.labels;
     var i, cum, props, serie, plot, labelsCount;
     
-    // Valorizzazione di tutte le opzioni utili e le impostazioni interne di ogni grafico e dell'ambiente di lavoro
+    // Enhancement of all the useful options and settings inside of each graph and the working environment
     if (common.executeIfChanged(env, ['values', 'series'])) {
       var idx = 0;
       var prevVisibleSerie = false;
@@ -497,7 +497,7 @@ $.elycharts.line = {
 
         var tpath = [];
         
-        // Ticks asse X
+        // Ticks X-axis
         if (props.ticks.active && (typeof props.ticks.active != 'object' || props.ticks.active[0])) {
           for (i = 0; i < nx + 1; i++) {
             if (props.nx != 'auto' || typeof labels[i] != 'boolean' || labels[i]) {
@@ -506,13 +506,13 @@ $.elycharts.line = {
             }
           }
         }
-        // Ticks asse L
+        // Ticks axis L
         if (props.ticks.active && (typeof props.ticks.active != 'object' || props.ticks.active[1]))
           for (i = 0; i < ny + 1; i++) {
             tpath.push(["M", opt.margins[3] - props.ticks.size[0], opt.margins[0] + Math.round(i * rowHeight) ]);
             tpath.push(["L", opt.margins[3] + props.ticks.size[1], opt.margins[0] + Math.round(i * rowHeight)]);
           }
-        // Ticks asse R
+        // Ticks axis R
         if (props.ticks.active && (typeof props.ticks.active != 'object' || props.ticks.active[2]))
           for (i = 0; i < ny + 1; i++) {
             tpath.push(["M", opt.width - opt.margins[1] - props.ticks.size[1], opt.margins[0] + Math.round(i * rowHeight) ]);

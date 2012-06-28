@@ -392,14 +392,14 @@ $.elycharts.common = {
   },
   
   /**
-   * Ottiene le proprietà di una "Area" definita nella configurazione (options),
-   * identificata da section / serie / index / subsection, e facendo il merge
-   * di tutti i defaults innestati.
-   */
+    * Gets the properties of an "area" defined in the configuration (options)
+    * Identified by section / standard / index / subsection, and by merging
+    * Of all defaults grafted.
+    */
   areaProps : function(env, section, serie, index, subsection) {
     var props;
 
-    // TODO fare una cache e fix del toLowerCase (devono solo fare la prima lettera
+    // TODO to a cache and fix the toLowerCase (should only take the first letter
     if (!subsection) {
       if (typeof serie == 'undefined' || !serie)
         props = env.opt[section.toLowerCase()];
@@ -436,7 +436,7 @@ $.elycharts.common = {
   },
   
   absrectpath : function(x1, y1, x2, y2, r) {
-    // TODO Supportare r
+    // TODO Support r
     return [['M', x1, y1], ['L', x1, y2], ['L', x2, y2], ['L', x2, y1], ['z']];
   },
   
@@ -542,7 +542,7 @@ $.elycharts.common = {
   },
   
   /**
-   * Prende la coordinata X di un passo di un path
+   * It takes the X coordinate of a step on a path
    */
   getX : function(p, pos) {
     switch (p[0]) {
@@ -558,7 +558,7 @@ $.elycharts.common = {
   },
 
   /**
-   * Prende la coordinata Y di un passo di un path
+   * It takes the Y coordinate of a step on a path
    */
   getY : function(p, pos) {
     switch (p[0]) {
@@ -574,11 +574,11 @@ $.elycharts.common = {
   },
   
   /**
-   * Prende il centro di un path
-   * 
-   * @param offset un offset [x,y] da applicare. Da notare che gli assi potrebbero essere dipendenti dalla figura 
-   *        (ad esempio per lo SLICE x e' l'asse che passa dal centro del cerchio, y l'ortogonale).
-   */
+    * Get the center of a path
+    *
+    * @ Param offset an offset [x, y] to apply. It should be noted that the axes could be dependent on the figure
+    * (For example, to the SLICE x 'axis that passes from the center of the circle, the orthogonal y).
+    */
   getCenter: function(path, offset) {
     if (!path.path)
       return false;
@@ -612,15 +612,15 @@ $.elycharts.common = {
   },
   
   /**
-   * Sposta il path passato di un offset [x,y]
-   * Il risultato e' il nuovo path
-   * 
-   * @param offset un offset [x,y] da applicare. Da notare che gli assi potrebbero essere dipendenti dalla figura 
-   *        (ad esempio per lo SLICE x e' l'asse che passa dal centro del cerchio, y l'ortogonale).
-   * @param marginlimit se true non sposta oltre i margini del grafico (applicabile solo su path standard o RECT)
-   * @param simple se true lo spostamento e' sempre fatto sul sistema [x, y] complessivo (altrimenti alcuni elementi, come lo SLICE,
-   *        si muovono sul proprio sistema di coordinate - la x muove lungo il raggio e la y lungo l'ortogonale)
-   */
+    * Move the path past an offset [x, y]
+    * The result is' the new path
+    *
+    * @ Param offset an offset [x, y] to apply. It should be noted that the axes could be dependent on the figure
+    * (For example, to the SLICE x 'axis that passes from the center of the circle, the orthogonal y).
+    * @ Param marginlimit if true does not move beyond the edges of the graph (only applicable on standard path or RECT)
+    * @ Param simple true if the displacement and 'always done on the system [x, y] total (otherwise some elements, such as SLICE,
+    * Move on its own coordinate system - the x moves along the radius and along the orthogonal y)
+    */
   movePath : function(env, path, offset, marginlimit, simple) {
     var p = [], i;
     if (path.length == 1 && path[0][0] == 'RECT')
@@ -699,7 +699,7 @@ $.elycharts.common = {
   },
 
   /**
-   * Ritorna le proprieta SVG da impostare per visualizzare il path non SVG passato (se applicabile, per CIRCLE e TEXT non lo e')
+   * Return the properties to be set for SVG does not display the SVG path past (if applicable, for CIRCLE and TEXT and not ')
    */
   getSVGProps : function(path, prevprops) {
     var props = prevprops ? prevprops : {};
@@ -727,8 +727,8 @@ $.elycharts.common = {
   },
   
   /**
-   * Disegna il path passato
-   * Gestisce la feature pixelWorkAround
+   * Draw the path past
+  * Manages the feature pixelWorkAround
    */
   showPath : function(env, path, paper) {
     path = this.preparePathShow(env, path);
@@ -752,21 +752,21 @@ $.elycharts.common = {
   },
   
   /**
-   * Applica al path le modifiche per poterlo visualizzare
-   * Per ora applica solo pixelWorkAround
-   */
+    * Apply the changes to the path to view it
+    * For now only applies pixelWorkAround
+    */
   preparePathShow : function(env, path) {
     return env.opt.features.pixelWorkAround.active ? this.movePath(env, this._clone(path), [.5, .5], false, true) : path;
   },
   
   /**
-   * Ritorna gli attributi Raphael completi di un piece
-   * Per attributi completi si intende l'insieme di attributi specificato, 
-   * assieme a tutti gli attributi calcolati che determinano lo stato 
-   * iniziale di un piece (e permettono di farlo ritornare a tale stato).
-   * In genere viene aggiunto il path SVG, per il circle vengono aggiunti
-   * i dati x,y,r
-   */
+    * Return the attributes of a complete piece Raphael
+    * For complete attributes is the set of attributes specified
+    * Along with all the attributes that determine the calculated
+    * Beginning of a piece (and let him return to that state).
+    * It is usually added to the SVG path, the circle is added
+    * The data x, y, r
+    */
   getPieceFullAttr : function(env, piece) {
     if (!piece.fullattr) {
       piece.fullattr = this._clone(piece.attr);
@@ -928,9 +928,9 @@ $.elycharts.common = {
   },
 
   /**
-   * Inserisce l'animazione richiesta nello stack di animazioni.
-   * Nel caso lo stack non sia inizializzato esegue subito l'animazione.
-   */ 
+    * Insert the animation required stack animations.
+    * If the stack is not initialized immediately executes the animation.
+    */ 
   animationStackPush : function(env, piece, element, newattr, speed, easing, delay, force) {
     if (typeof delay == 'undefined')
       delay = 0;
@@ -1080,66 +1080,66 @@ $.elycharts.featuresmanager = {
 
 /***********************************************
 
-* OGGETTI USATI:
+* USED ​​ITEMS:
 
 PIECE:
-Contiene un elemento da visualizzare nel grafico. E' un oggetto con queste proprietà:
+Contains an element to be plotted. And 'an object with these properties:
 
-- section,[serie],[index],[subsection]: Dati che permettono di identificare che tipo
-  di elemento è e a quale blocco della configurazione appartiene.
-  Ad esempio gli elementi principali del chart hanno
-  section="Series", serie=nome della serie, subSection = 'Plot'
-- [paths]: Contiene un array di pathdata, nel caso questo piece è costituito da 
-  piu' sottoelementi (ad esempio i Dots, o gli elementi di un Pie o Funnel)
-- [PATHDATA.*]: Se questo piece e' costituito da un solo elemento, i suoi dati sono
-  memorizzati direttamente nella root di PIECE.
-- show: Proprieta' usata internamente per decidere se questo piece dovrà essere
-  visualizzato o meno (in genere nel caso di una transizione che non ha variato
-  questo piece, che quindi puo' essere lasciato allo stato precedente)
-- hide: Proprieta' usata internamente per decidere se l'elemento va nascosto,
-  usato in caso di transizione se l'elemento non è piu' presente.
+- Section, [series], [index], [subsection]: Data that identify what type
+  element is and which block the configuration belongs.
+  For example, the main elements of the chart have
+  href = "Series", series = series name subsection = 'Plot'
+- [Paths]: Contains an array of pathdata, if this piece is made of
+  more 'sub-elements (eg Dots, or the elements of a Pie or Funnel)
+- [PATHDATA. *]: If this piece, and 'consists of a single element, its data are
+  stored directly in the root of PIECE.
+- Show: Property 'used internally to decide if this piece should be
+  displayed or less (typically in the case of a transition that has not changed
+  This piece, which then can 'be left to the previous state)
+- Hide: Property 'used internally to decide whether the item is hidden,
+  used in case of transition if the element is not more 'present.
 
 PATHDATA:
-I dati utili per visualizzare un path nel canvas:
+The user data to display a path in the canvas:
 
-- PATH: Il path che permette di disegnare l'elemento. Se NULL l'elemento è vuoto/ da
-  non visualizzare (instanziato solo come placeholder)
-- attr: gli attributi Raphael dell'elemento. NULL se path è NULL.
-- [center]: centro del path
-- [rect]: rettangolo che include il path
+- PATH: The path that allows you to draw the item. NULL if the element is empty / from
+  Do not display (instantiated only as placeholder)
+- Attr: attributes Raphael element. NULL if path is NULL.
+- [Center] center of the path
+- [Rect]: rectangle that includes the path
 
 PATH:
-Un array in cui ogni elemento determina un passo del percorso per disegnare il grafico.
-E' una astrazione sul PATH SVG effettivo, e puo' avere alcuni valori speciali:
-[ [ 'TEXT',  testo, x, y ] ]
-[ [ 'CIRCLE', x, y, raggio ] ]
-[ [ 'RECT', x1, y1, x2, y2, rounded ] ] (x1,y1 dovrebbero essere sempre le coordinate in alto a sx)
-[ [ 'SLICE', x, y, raggio, raggio int, angolo1, angolo2 ] ] (gli angoli sono in gradi)
-[ [ 'RELEMENT', element ] ] (elemento Raphael gia' disegnato)
-[ [ 'DOMELEMENT', element ] ] (elemento DOM - in genere un DIV html - già disegnato)
-[ ... Path SVG ... ]
+An array where each element results in a step of the way to draw the graph.
+And 'an abstraction over the actual PATH SVG, and may' have some special values:
+[['TEXT', text, x, y]]
+[['CIRCLE', x, y, radius]]
+[['Rect', x1, y1, x2, y2, rounded]] (x1, y1 should always be the coordinates in the upper left)
+[['SLICE', x, y, radius, radius int, Angle1, Angle2]] (the angles are in degrees)
+[['RELEMENT', element]] (Raphael element already 'drawn)
+[['DOMElement', element]] (DOM element - typically a DIV html - already designed)
+[... Path SVG ... ]
 
-------------------------------------------------------------------------
+-------------------------------------------------- ----------------------
 
 Z-INDEX:
-0 : base
-10 : tooltip
-20 : interactive area (tutti gli elementi innescati dalla interactive area dovrebbero essere < 20)
-25 : label / balloons (potrebbero essere resi cliccabili dall'esterno, quindi > 20)
+0: Basic
+10: tooltip
+20: interactive area (all elements triggered by interactive area should be <20)
+25: label / balloons (may be made clickable from the outside, then> 20)
 
-------------------------------------------------------------------------
+-------------------------------------------------- ----------------------
 
 USEFUL RESOURCES:
 
 http://docs.jquery.com/Plugins/Authoring
 http://www.learningjquery.com/2007/10/a-plugin-development-pattern
-http://dean.edwards.name/packer/2/usage/#special-chars
+http://dean.edwards.name/packer/2/usage/ # special-chars
 
-http://raphaeljs.com/reference.html#attr
+http://raphaeljs.com/reference.html # attr
 
 TODO
-* ottimizzare common.areaProps
-* rifare la posizione del tooltip del pie
-* ripristinare shadow
+* Optimize common.areaProps
+* Repeat the position of the tooltip of the pie
+* Restore shadow
 
 *********************************************/

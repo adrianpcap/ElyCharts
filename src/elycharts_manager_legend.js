@@ -39,7 +39,7 @@ $.elycharts.legendmanager = {
     
     var wauto = 0;
     var items = [];
-    // env.opt.legend normalmente è { serie : 'Legend', ... }, per i pie invece { serie : ['Legend', ...], ... }
+    // env.opt.legend normally {series: 'Legend', ... }, {Series for pie instead: ['Legend', ...], ... }
     var legendCount = 0;
     var serie, data, h, w, x, y, xd;
     for (serie in env.opt.legend) {
@@ -73,7 +73,7 @@ $.elycharts.legendmanager = {
         var tprops = sprops.legend && sprops.legend.textProps ? sprops.legend.textProps : props.textProps;
         
         if (!props.horizontal) {
-          // Posizione dell'angolo in alto a sinistra
+          // Position of the top left
           h = (props.height - props.margins[0] - props.margins[2]) / legendCount;
           w = props.width - props.margins[1] - props.margins[3];
           x = Math.floor(props.x + props.margins[3]);

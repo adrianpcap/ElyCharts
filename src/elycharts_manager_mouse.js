@@ -28,7 +28,7 @@ $.elycharts.mousemanager = {
       env.mousePaper = null;
       env.mouseTimer = null;
       env.mouseAreas = null;
-      // Meglio fare anche l'unbind???
+      // Better to make even the unbind??
     }
 
     env.mouseLayer = $('<div></div>').css({position : 'absolute', 'z-index' : 20, opacity : 0}).prependTo(env.container);

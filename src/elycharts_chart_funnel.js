@@ -59,9 +59,9 @@ $.elycharts.funnel = {
     var paths = [];  
     for (var i = 1; i < values.length; i++) {
       var v = values[0] ? values[i] : 1;
-      // METODO "cutarea"
-      // area taglio attuale / area taglio iniziale = valore attuale / valore iniziare
-      // => larghezza attuale = sqrt(values[i] / values[0] * pow(larghezza iniziale / 2, 2)) * 2
+      // METHOD "cutarea"
+       // Current cutting area / cutting area = initial present value / start value
+       // => Actual width = sqrt (values ​​[i] / values ​​[0] * pow (initial width / 2, 2)) * 2
       if ((path = this.section(env, h, h = h + hslices, w,
         opt.method == 'width' ? w = v / v0 * wratio : w = Math.sqrt(v / v0 * Math.pow(wratio / 2, 2)) * 2)))
       var props = common.areaProps(env, 'Series', serie, i - 1);

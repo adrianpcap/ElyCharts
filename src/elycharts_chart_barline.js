@@ -12,15 +12,15 @@ var featuresmanager = $.elycharts.featuresmanager;
 var common = $.elycharts.common;
 
 /***********************************************************************
- * CHART: BARLINE
- * 
- * Singola barra orizzontale contenente vari valori.
- * 
- * L'idea è che possa essere vista come una linechart orizzontale 
- * invece di verticale, con solo serie di tipo bar e con un solo valore.
- * In futuro (quando sarà possibile far linechart orizzontali) potrebbe
- * proprio essere renderizzata in questo modo.
- **********************************************************************/
+  * CHART: BARLINE
+  *
+  * Single horizontal bar containing various values​​.
+  *
+  * The idea is that it can be seen as a horizontal LineChart
+  * Instead of vertical, with only a series of type bars and with a single value.
+  * In the future (when you can make LineChart horizontal) could
+  *'s Being rendered in this way.
+  **********************************************************************/
 
 $.elycharts.barline = {
   
@@ -54,7 +54,7 @@ $.elycharts.barline = {
       if (plot.to > maxvalue)
         maxvalue = plot.to;
     }
-    // TODO opt.max dovrebbe essere opt.axis[?].max ?
+    // TODO opt.max should be opt.axis [?]. max?
     if (typeof opt.max != 'undefined')
       maxvalue = opt.max;
     if (!maxvalue)
